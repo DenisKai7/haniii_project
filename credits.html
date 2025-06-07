@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Credits - Untuk Dek Haniii</title>
+    <link rel="stylesheet" href="css/style.css"> <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Gaya khusus untuk halaman credits */
+        body {
+            background: linear-gradient(to bottom, #1a1a2e, #331f40, #1a1a2e); /* Gradient gelap */
+            overflow: hidden; /* Mencegah scroll manual */
+            color: var(--text-light);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh; /* Pastikan tinggi minimal untuk animasi */
+        }
+
+        .credit-roll-container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden; /* Pastikan teks tidak terlihat di luar container */
+        }
+
+        .credit-roll-content {
+            position: absolute;
+            bottom: -100%; /* Mulai dari bawah layar */
+            width: 80%;
+            max-width: 800px;
+            left: 50%;
+            transform: translateX(-50%); /* Pusatkan konten */
+            animation: creditRoll 60s linear forwards; /* Animasi utama, sesuaikan durasi */
+            text-align: center;
+            padding-bottom: 200px; /* Ruang ekstra agar teks terakhir naik cukup tinggi */
+        }
+
+        .credit-title {
+            font-size: 4em;
+            color: var(--accent-gold);
+            text-shadow: 0 0 15px rgba(255, 215, 0, 0.7);
+            margin-bottom: 50px;
+        }
+
+        .credit-thanks {
+            font-size: 1.8em;
+            font-style: italic;
+            margin-bottom: 60px;
+            color: var(--accent-pink);
+        }
+
+        .credit-group {
+            margin-bottom: 40px;
+            line-height: 1.4;
+        }
+
+        .credit-group h3 {
+            font-family: var(--font-body);
+            font-size: 1.5em;
+            color: var(--accent-pink);
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .credit-group p {
+            font-size: 1.1em;
+            margin: 5px auto;
+        }
+
+        .credit-final-message {
+            font-size: 1.6em;
+            color: var(--accent-gold);
+            margin-top: 80px;
+            line-height: 1.8;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+            /* Tambahkan efek shimmer/glow saat di akhir */
+            animation: finalMessageGlow 2s infinite alternate 58s; /* Dimulai mendekati akhir animasi creditRoll */
+        }
+
+        @keyframes creditRoll {
+            0% {
+                transform: translateY(100vh) translateX(-50%); /* Mulai dari bawah viewport */
+            }
+            100% {
+                transform: translateY(-100%) translateX(-50%); /* Gulir ke atas hingga tidak terlihat */
+            }
+        }
+
+        @keyframes finalMessageGlow {
+            0% { opacity: 0.7; text-shadow: 0 0 5px var(--accent-gold); }
+            100% { opacity: 1; text-shadow: 0 0 20px var(--accent-gold), 0 0 30px var(--accent-gold); }
+        }
+
+        /* Tombol Kembali ke Halaman Utama */
+        .back-to-home {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+            padding: 10px 20px;
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 1em;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .back-to-home:hover {
+            background-color: rgba(255, 255, 255, 0.4);
+            border-color: white;
+        }
+
+        /* Responsive untuk mobile */
+        @media (max-width: 768px) {
+            .credit-roll-content {
+                width: 95%;
+            }
+            .credit-title {
+                font-size: 3em;
+            }
+            .credit-thanks {
+                font-size: 1.4em;
+            }
+            .credit-group h3 {
+                font-size: 1.2em;
+            }
+            .credit-group p {
+                font-size: 1em;
+            }
+            .credit-final-message {
+                font-size: 1.2em;
+            }
+        }
+        #background-animation-overlay {
+    position: fixed; /* **PENTING**: Ini membuatnya menutupi seluruh viewport dan tidak akan bergerak saat scroll */
+    top: 0;
+    left: 0;
+    width: 100vw; /* Lebar 100% viewport */
+    height: 100vh; /* Tinggi 100% viewport */
+    z-index: -1; /* **PENTING**: Di belakang semua konten utama */
+    pointer-events: none; /* Tidak menghalangi interaksi mouse */
+    overflow: hidden; /* Penting untuk menyembunyikan elemen di luar viewport */
+    /* Tambahan: Opsional, untuk efek visual, misalnya sedikit gradien di overlay */
+    background: radial-gradient(circle at center, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0) 70%);
+}
+/* Gaya dasar untuk elemen animasi (bunga/hati) */
+.animated-element {
+    position: absolute;
+    font-size: 2em; /* Ukuran icon */
+    opacity: 0;
+    animation: floatAndFade 10s infinite ease-out; /* Animasi default */
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.5); /* Efek glow */
+}
+
+@keyframes floatAndFade {
+    0% { transform: translateY(100vh) translateX(0) rotate(0deg); opacity: 0; }
+    10% { opacity: 0.8; }
+    90% { opacity: 0.8; }
+    100% { transform: translateY(-100vh) translateX(calc(var(--random-x) * 1px)) rotate(calc(var(--random-rot) * 1deg)); opacity: 0; }
+}
+    </style>
+</head>
+<body>
+<div id="background-animation-overlay"></div>
+    <a href="index.html" class="back-to-home">← Kembali ke Halaman Utama</a>
+
+    <div class="credit-roll-container">
+        <div class="credit-roll-content">
+            <h2 class="credit-title">Selamat Ulang Tahun<br>Dek Haniii</h2>
+            <p class="credit-thanks">Terima Kasih Telah Bersama Menjelajahi Perjuangan Ini</p>
+
+            <div class="credit-group">
+                <h3>Dari Mas Denis</h3>
+                <p>Persembahan untuk Dek Haniii</p>
+                <p>Dek Haniii yang Paling Cantik</p>
+            </div>
+
+            <div class="credit-group">
+                <h3>Makasiih udah berjuang</h3>
+                <p>Dek Haniii keren, Dek Haniii kece abis</p>
+                <p>Tetap semangaatt untuk tantangan-tantangan berikutnya</p>
+            </div>
+
+            <div class="credit-group">
+                <h3>Semangaatt untuk mewujudkan mimpimu</h3>
+                <p>Aku akan selalu mengusahakan yang terbaik untuk membimbing dan mendukungmu</p>
+            </div>
+
+            <div class="credit-group">
+                <h3>Mari kita bersama perjuangkan dan wujudkan satu per satu</h3>
+                <p>Mari untuk berjuang bersama</p>
+                <p>Mari untuk Berproses bersama</p>
+            </div>
+
+            <div class="credit-group">
+                <h3>Mari kita bersama melewati segalanya</h3>
+                <p>Tetap semangat dan jangan menyerah</p>
+                <p>Aku akan selalu ada di sisimu, mendukungmu, membimbingmu, dan melakukan yang terbaik untukmu</p>
+            </div>
+
+            <div class="credit-group">
+                <h3>Special Thanks To</h3>
+                <p>Setiap Momen Indah,</p>
+                <p>Setiap Tawa dan Air Mata Bahagia,</p>
+                <p>Setiap Mimpi yang Kita Rajut Bersama.</p>
+            </div>
+
+            <div class="credit-group">
+                <h3>Dedicated To</h3>
+                <p>Kisah Perjuangan yang Abadi</p>
+            </div>
+
+            <p class="credit-final-message">
+                Mari Berjuang dan Berproses Bersama<br>
+                Made with Love, Mas Denis ❤️
+            </p>
+        </div>
+    </div>
+<script src="js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,493 @@
+/* --- General Styling --- */
+:root {
+    --primary-dark: #1a1a2e; /* Warna dasar gelap */
+    --accent-pink: #ff69b4; /* Pink romantis */
+    --accent-gold: #ffd700; /* Emas */
+    --text-light: #e0e0e0;
+    --text-dark: #333;
+    --font-heading: 'Playfair Display', serif;
+    --font-body: 'Montserrat', sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-body);
+    margin: 0;
+    background-color: var(--primary-dark);
+    color: var(--text-light);
+    overflow-x: hidden; /* Mencegah scroll horizontal yang tidak diinginkan */
+    line-height: 1.6;
+}
+
+h1, h2 {
+    font-family: var(--font-heading);
+    color: var(--accent-pink);
+    text-align: center;
+    margin-bottom: 20px;
+    text-shadow: 0 0 10px rgba(255, 105, 180, 0.5); /* Efek glow ringan */
+}
+
+h1 {
+    font-size: 3.5em;
+    font-weight: 700;
+}
+
+h2 {
+    font-size: 2.5em;
+    font-weight: 700;
+}
+
+p {
+    font-size: 1.1em;
+    max-width: 800px;
+    margin: 0 auto 20px auto;
+    text-align: center;
+}
+
+a {
+    color: var(--accent-pink);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: var(--accent-gold);
+}
+
+/* --- Background Animation Overlay --- */
+#background-animation-overlay {
+    position: fixed; /* **PENTING**: Ini membuatnya menutupi seluruh viewport dan tidak akan bergerak saat scroll */
+    top: 0;
+    left: 0;
+    width: 100vw; /* Lebar 100% viewport */
+    height: 100vh; /* Tinggi 100% viewport */
+    z-index: -1; /* **PENTING**: Di belakang semua konten utama */
+    pointer-events: none; /* Tidak menghalangi interaksi mouse */
+    overflow: hidden; /* Penting untuk menyembunyikan elemen di luar viewport */
+    /* Tambahan: Opsional, untuk efek visual, misalnya sedikit gradien di overlay */
+    background: radial-gradient(circle at center, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0) 70%);
+}
+
+/* Gaya dasar untuk elemen animasi (bunga/hati) */
+.animated-element {
+    position: absolute;
+    font-size: 2em; /* Ukuran icon */
+    opacity: 0;
+    animation: floatAndFade 10s infinite ease-out; /* Animasi default */
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.5); /* Efek glow */
+}
+
+@keyframes floatAndFade {
+    0% { transform: translateY(100vh) translateX(0) rotate(0deg); opacity: 0; }
+    10% { opacity: 0.8; }
+    90% { opacity: 0.8; }
+    100% { transform: translateY(-100vh) translateX(calc(var(--random-x) * 1px)) rotate(calc(var(--random-rot) * 1deg)); opacity: 0; }
+}
+
+/* --- Hero Section --- */
+.hero-section {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+    overflow: hidden; /* Penting untuk video latar belakang */
+    background: linear-gradient(135deg, rgba(26,26,46,0.9), rgba(60,20,80,0.9)); /* Fallback jika video tidak dimuat */
+    background-size: cover;
+    background-position: center;
+}
+
+.hero-video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: -2;
+    transform: translateX(-50%) translateY(-50%);
+    background-size: cover;
+}
+
+.hero-content {
+    z-index: 1;
+    background-color: rgba(0, 0, 0, 0.4); /* Overlay gelap agar teks terbaca */
+    padding: 40px;
+    border-radius: 15px;
+    backdrop-filter: blur(5px); /* Efek blur pada latar belakang */
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+}
+
+.cta-button {
+    display: inline-block;
+    padding: 15px 30px;
+    background-color: var(--accent-pink);
+    color: white;
+    border-radius: 5px;
+    font-weight: bold;
+    margin-top: 30px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    border: 2px solid var(--accent-pink);
+}
+
+.cta-button:hover {
+    background-color: transparent;
+    border-color: var(--accent-gold);
+    color: var(--accent-gold);
+    transform: scale(1.05);
+}
+
+/* --- Navigation (Hamburger Menu) --- */
+.main-nav {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+.hamburger {
+    width: 30px;
+    height: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+    z-index: 1001; /* Pastikan di atas nav-links */
+    position: relative;
+}
+
+.hamburger span {
+    display: block;
+    width: 100%;
+    height: 3px;
+    background-color: var(--accent-pink);
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.hamburger.open span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+
+.hamburger.open span:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger.open span:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
+}
+
+.nav-links {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.95);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+    padding: 0;
+    transform: translateX(100%);
+    transition: transform 0.5s ease-in-out;
+    z-index: 999;
+}
+
+.nav-links.open {
+    transform: translateX(0);
+}
+
+.nav-links li {
+    margin: 20px 0;
+    opacity: 0; /* Akan dianimasikan oleh JS */
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.nav-links.open li {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.nav-links.open li:nth-child(1) { transition-delay: 0.1s; }
+.nav-links.open li:nth-child(2) { transition-delay: 0.15s; }
+.nav-links.open li:nth-child(3) { transition-delay: 0.2s; }
+.nav-links.open li:nth-child(4) { transition-delay: 0.25s; }
+.nav-links.open li:nth-child(5) { transition-delay: 0.3s; }
+.nav-links.open li:nth-child(6) { transition-delay: 0.35s; }
+
+
+.nav-links a {
+    color: var(--text-light);
+    font-size: 2em;
+    font-weight: 700;
+    transition: color 0.3s ease, letter-spacing 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: var(--accent-gold);
+    letter-spacing: 2px;
+}
+
+/* --- Content Sections --- */
+.content-section {
+    position: relative;
+    padding: 80px 20px;
+    min-height: 70vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    color: var(--text-light);
+}
+
+.section-content {
+    z-index: 2;
+    background-color: rgba(0, 0, 0, 0.6); /* Sedikit overlay gelap untuk teks */
+    padding: 40px;
+    border-radius: 10px;
+    backdrop-filter: blur(3px);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+    max-width: 900px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* --- Video Section --- */
+#video {
+    position: relative; /* Penting agar video background diposisikan relatif terhadap section ini */
+    background-color: #4a1f2e; /* Warna fallback jika video tidak dimuat */
+}
+
+/* Gaya BARU untuk video lokal sebagai latar belakang SELURUH SECTION */
+.section-background-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Pastikan video mengisi seluruh area section tanpa distorsi */
+    z-index: 1; /* **PENTING**: Di bawah konten, tetapi di atas background-color section */
+    opacity: 0.25; /* Tingkat transparansi video, sesuaikan sesuai keinginan */
+    filter: brightness(0.6) blur(2px) grayscale(50%); /* Gelapkan, blur, dan sedikit abu-abu */
+}
+
+/* Sesuaikan gaya .section-content untuk tampil di atas video background */
+.section-content {
+    position: relative; /* **PENTING**: Agar konten berada di atas video background */
+    z-index: 2; /* **PENTING**: Pastikan konten berada di atas .section-background-video (z-index: 1) */
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+    max-width: 900px;
+    width: 100%;
+    box-sizing: border-box;
+    
+    justify-content: center;
+    /* Kembalikan latar belakang semi-transparan untuk card konten agar teks mudah dibaca */
+    background-color: rgba(0, 0, 0, 0.6); /* Latar belakang gelap transparan untuk card konten */
+    backdrop-filter: blur(5px); /* Efek blur pada card konten itu sendiri */
+    overflow: hidden; /* Untuk memastikan konten dan bayangan tidak melampaui border-radius */
+}
+
+.section-music-content { /* Gunakan class ini jika Anda ingin gaya spesifik untuk card musik */
+    position: relative; /* **PENTING**: Agar konten berada di atas background overlay */
+    z-index: 10; /* Lebih tinggi dari background-animation-overlay (z-index: -1) */
+    
+    /* Gaya untuk card konten musik */
+    background-color: rgba(0, 0, 0, 0.7); /* Latar belakang gelap transparan untuk card */
+    backdrop-filter: blur(8px); /* Efek blur pada latar belakang card */
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    max-width: 900px;
+    margin: 0 auto; /* Memusatkan card secara horizontal */
+    width: 100%;
+    box-sizing: border-box;
+
+    display: flex; /* Untuk memusatkan item di dalamnya */
+    flex-direction: column;
+    align-items: center; /* Pusatkan horizontal */
+    justify-content: center; /* Pusatkan vertikal jika tinggi cukup */
+    text-align: center;
+}
+
+/* Parallax Backgrounds */
+.parallax-bg {
+    position: relative;
+    background-attachment: fixed; /* Kunci gambar di latar belakang */
+    background-size: cover;
+    background-position: center;
+}
+
+.parallax-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1.5; /* Jika ada, posisikan di antara video dan konten */
+    opacity: 0.15; /* Sangat transparan sebagai overlay */
+    filter: brightness(0.8);
+}
+
+/* Contoh latar belakang untuk bagian spesifik (ganti dengan gambar Anda) */
+#message {
+    background-color: #331f40; /* Warna gelap ungu */
+}
+#gallery {
+    background-color: #2a2a3e; /* Warna gelap biru */
+}
+#video {
+    background-color: #4a1f2e; /* Warna gelap merah marun */
+}
+#music {
+    background-color: #1e3a4e; /* Warna gelap teal */
+}
+
+
+/* --- Galeri Foto --- */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    padding: 20px 0;
+}
+
+.gallery-item {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease;
+    cursor: pointer;
+}
+
+.gallery-item:hover {
+    transform: scale(1.03) translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+    filter: brightness(1.1);
+}
+
+/* --- Video Section --- */
+.video-container {
+    position: relative;
+    padding-bottom: 56.25%; /* Rasio aspek 16:9 */
+    height: 0;
+    overflow: hidden;
+    margin: 20px auto;
+    max-width: 90%;
+    border-radius: 10px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
+    background-color: rgba(0, 0, 0, 0.5); /* Background gelap untuk iframe YouTube */
+}
+
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+/* --- Audio Player --- */
+.audio-player {
+    width: 100%;
+    max-width: 600px;
+    margin: 30px 0; /* Ubah margin:auto menjadi 0 jika parent sudah flexbox align-items:center */
+    filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(285deg) brightness(100%) contrast(100%);
+    padding: 10px 20px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* --- Footer --- */
+footer {
+    background-color: var(--primary-dark);
+    color: var(--text-light);
+    text-align: center;
+    padding: 40px 20px;
+    font-size: 0.9em;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* --- Responsive Design --- */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2.5em;
+    }
+
+    h2 {
+        font-size: 2em;
+    }
+
+    .hero-content {
+        padding: 25px;
+    }
+
+    .cta-button {
+        padding: 12px 25px;
+        font-size: 0.9em;
+    }
+
+    .hamburger {
+        top: 15px;
+        right: 15px;
+    }
+
+    .nav-links a {
+        font-size: 1.5em;
+    }
+
+    .section-content {
+        padding: 30px;
+    }
+
+    .gallery-grid {
+        grid-template-columns: 1fr; /* Satu kolom di mobile */
+    }
+}
+
+/* --- Animasi On Scroll (AOS-like) --- */
+.animate-on-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 1s ease-out, transform 1s ease-out;
+}
+
+.animate-on-scroll.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.fade-in-up {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 1s ease-out forwards;
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.delay-1 { animation-delay: 0.3s; }
+.delay-2 { animation-delay: 0.6s; }
+.delay-3 { animation-delay: 0.9s; }
+/* Tambahkan lebih banyak delay jika diperlukan */
+
